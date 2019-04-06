@@ -1,9 +1,34 @@
 var express = require("express");
 var app = express();
-var server = require("http").createServer(app);
+var server = require("http").createServer(app).listen(7777);
 var io = require("socket.io").listen(server);
 
-server.listen(7777);
+// var mysql      = require('mysql');
+// var connection = mysql.createConnection({
+//   host     : 'localhost',
+//   user     : 'root',
+//   password : 'root',
+//   database : 'test-chat',
+//   port: '7777'
+// });
+
+// connection.connect();
+
+// connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+//     if (error) throw error;
+//     console.log('The solution is: ', results[0].solution);
+//   });
+
+// // connection.connect(function(err) {
+// //     if (err) {
+// //       console.error('error connecting: ' + err.stack);
+// //       return;
+// //     }
+  
+// //     console.log('connected as id ' + connection.threadId);
+// // });
+ 
+// connection.end();
 
 app.get('/', (req,resp) => {
     resp.sendFile(__dirname + "/index.html");
