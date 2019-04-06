@@ -1,0 +1,23 @@
+{
+  "name": "nodechat",
+  "version": "1.0.0",
+  "description": "NodeJS chat which used Socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/demoniik111/nodeChat.git"
+  },
+  "author": "Dmitriy Zheltiy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/demoniik111/nodeChat/issues"
+  },
+  "homepage": "https://github.com/demoniik111/nodeChat#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}
