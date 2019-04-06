@@ -8,6 +8,9 @@ server.listen(7777);
 app.get('/', (req,resp) => {
     resp.sendFile(__dirname + "/index.html");
 });
+app.get('/style.css', (req,resp) => {
+    resp.sendFile(__dirname + "/style.css");
+});
 
 users = [];
 connections = [];
