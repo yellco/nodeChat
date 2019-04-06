@@ -9,51 +9,84 @@
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body class="text-center">
+    <div id="online">
+        Сейчас онлайн: <div id="count">0</div>
+    </div>
     <form class="form-signin" id="messForm">
         <img class="mb-4" src="https://js2.pngtree.com/v3/images/home/paradrop.png" alt="" draggable="false">
-        <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
-        <label for="inputEmail" class="sr-only">Email адрес</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email адрес" required autofocus>
-        <label for="inputPassword" class="sr-only">Пароль</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
-        <!-- <div class="checkbox mb-3">
-            <label>
-            <input type="checkbox" value="remember-me"> Запомнить меня
-            </label>
-        </div> -->
-        <div class="checkbox mb-3">
-            <label>
-                <a href="">Регистрация</a>
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+        <h1 class="h3 mb-3 font-weight-normal">Отправьте своё сообщение</h1>
+        <label for="name" class="sr-only">Имя</label>
+        <input type="text" id="name" class="form-control" placeholder="Имя" required>
+        <label for="message" class="sr-only">Сообщение</label>
+        <input type="text" id="message" class="form-control" placeholder="Сообщение" required autofocus>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Отправить</button>
         <p class="mt-5 mb-3 text-muted">&copy; Все права защищены 2019</p>
     </form>
-    <div class="col-6">
+    <div class="col-md-6 messages">
         <h3>Сообщения</h3>
-        <div id="all_mess"></div>
+        <div id="all_mess">
+            <div id="none_info">Пока никто ничего не написал</div>
+        </div>
     </div>
     <script src="/socket.io/socket.io.js "></script>
     <script>
-        window.onload = function(){
+        document.addEventListener('DOMContentLoaded', function(){
             var socket = io.connect();
             var form = document.getElementById("messForm");
-            var input = document.getElementById("inputEmail");
             var all_messages = document.getElementById("all_mess");
+            var name = document.getElementById("name");
+            var message = document.getElementById("message");
+            var count = document.getElementById("count");
+            var none = document.getElementById("none_info");
+            var colors = [{
+                            bg: '#e6f3ff',
+                            text: 'black'
+            }];
+            var colors2 = [{
+                            bg: '#FFE800',
+                            text: '#530FAD'
+                        },{
+                            bg: '#FF9C00',
+                            text: '#0E53A7'
+                        },{
+                            bg: '#F10026',
+                            text: '#3BDA00'
+                        },{
+                            bg: 'black',
+                            text: 'white'
+            }];
 
             form.onsubmit = function(event){
                 event.preventDefault();
-                console.log(input.value);
-                socket.emit('send mess', input.value);
-                input.value = '';
+                var now = new Date();
+
+                socket.emit('send mess', 
+                {
+                    mess: message.value, 
+                    name: name.value,
+                    time: now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds()
+                });
+                message.value = '';
             }
 
             socket.on('add mess', function(data){
+                none.remove();
                 var newDiv = document.createElement('div');
-                newDiv.innerHTML = data.msg;
+                var rnd = getRnd(colors.length);
+                newDiv.innerHTML = '<div style="background:'+ colors[rnd].bg +';color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">'+ data.name + '</div><div class="body"><div class="message">' + data.mess + '</div><div class="time"> (' + data.time + ')' + '</div></div></div>';
                 all_messages.appendChild(newDiv);
-            })
-        }
+            });
+
+            socket.on('new_connect', function(data){
+                count.textContent = data[0];
+                console.table(data[1]);
+            });
+
+            function getRnd(max) {
+                return parseInt(Math.random() * max);
+            }
+        });
     </script>
 </body>
 </html>
