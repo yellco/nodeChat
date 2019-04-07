@@ -44,19 +44,8 @@
                             bg: '#e6f3ff',
                             text: 'black'
             }];
-            var colors2 = [{
-                            bg: '#FFE800',
-                            text: '#530FAD'
-                        },{
-                            bg: '#FF9C00',
-                            text: '#0E53A7'
-                        },{
-                            bg: '#F10026',
-                            text: '#3BDA00'
-                        },{
-                            bg: 'black',
-                            text: 'white'
-            }];
+            var now2 = new Date();
+            var isFirstMsg = false;
 
             form.onsubmit = function(event){
                 event.preventDefault();
@@ -72,17 +61,31 @@
             }
 
             socket.on('add mess', function(data){
+                addDiv(data)
+            });
+
+            socket.on('new_connect', function(data){
+                count.textContent = data[0];
+                if(!isFirstMsg){
+                    none.remove();
+                    var newDiv = document.createElement('div');
+                    var rnd = getRnd(colors.length);
+                    newDiv.innerHTML = '<div style="background:#d8f3b6;color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Здравствуйте, уважаемый!<br> Предыдущая история сообщений не сохраняется. При обновлении страницы вы также потеряете все сообщения.</div><div class="time"> (' + now2.getHours() + ":" + now2.getMinutes() + ":" + now2.getSeconds() + ')' + '</div></div></div>';
+                    all_messages.appendChild(newDiv);
+                    all_messages.scrollTop = all_messages.scrollHeight;
+                    isFirstMsg = true;
+                }
+
+            });
+
+            function addDiv(data){
                 none.remove();
                 var newDiv = document.createElement('div');
                 var rnd = getRnd(colors.length);
                 newDiv.innerHTML = '<div style="background:'+ colors[rnd].bg +';color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">'+ data.name + '</div><div class="body"><div class="message">' + data.mess + '</div><div class="time"> (' + data.time + ')' + '</div></div></div>';
                 all_messages.appendChild(newDiv);
                 all_messages.scrollTop = all_messages.scrollHeight;
-            });
-
-            socket.on('new_connect', function(data){
-                count.textContent = data[0];
-            });
+            }
 
             function getRnd(max) {
                 return parseInt(Math.random() * max);
