@@ -9,23 +9,26 @@
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body class="text-center">
-    <div id="online">
-        Сейчас онлайн: <div id="count">0</div>
-    </div>
     <div id="main">
-        <h3>Сообщения</h3>
-        <div id="all_mess">
-            <div id="none_info">Пока никто ничего не написал</div>
+        <div id="list">
+            <div id="online">
+                Сейчас онлайн: <div id="count">0</div>
+            </div>
         </div>
-        <form class="form-signin" id="messForm">
-            <label for="name" class="sr-only">Имя</label>
-            <input type="text" id="name" class="form-control" placeholder="Имя" required>
-            <label for="message" class="sr-only">Сообщение</label>
-            <input type="text" id="message" class="form-control" placeholder="Сообщение" required autofocus>
-            <br>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Отправить</button>
-            <p class="mt-5 mb-3 text-muted">&copy; Все права защищены 2019</p>
-        </form>
+        <div id="messagemain">
+            <h3>Сообщения</h3>
+            <div id="all_mess">
+                <div id="none_info">Пока никто ничего не написал</div>
+            </div>
+            <form class="form-signin" id="messForm">
+                <label for="name" class="sr-only">Имя</label>
+                <input type="text" id="name" class="form-control" placeholder="Имя" required>
+                <label for="message" class="sr-only">Сообщение</label>
+                <input type="text" id="message" class="form-control" placeholder="Сообщение" required autofocus>
+                <br>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Отправить</button>
+            </form>
+        </div>
     </div>
     <script src="/socket.io/socket.io.js "></script>
     <script>
