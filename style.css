@@ -69,7 +69,7 @@ body {
   display:flex;
 }
 .time{
-  margin-left:2px;
+  margin-left:auto;
 }
 #all_mess{
   overflow:auto;
