@@ -82,10 +82,10 @@ border-top-right-radius: 0;
   width: 6px;
 }
 #all_mess::-webkit-scrollbar-thumb {
-  border-radius: 4px;background: #dfdeae;
+  border-radius: 4px;background: #d2d3e7;
 }
 #all_mess:hover::-webkit-scrollbar-thumb {
-  background: #899244;
+  background: #97a1a5;
 }
 #none_info{
   top: 50%;
