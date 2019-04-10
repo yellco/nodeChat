@@ -115,6 +115,21 @@ body {
 #rooms{
   width:100%;
   border: 1px solid rgba(0,0,0,0.3);
+  position:relative;
+}
+#makeroom{
+  cursor:pointer;
+}
+#rooms #symbol{
+  position:absolute;
+  right:0px;
+  top:0px;
+  transition-property: transform;
+  transition-duration: 1s;
+  font-size:16px;
+}
+#symbol:hover{
+  transform:scale(2);
 }
 @media screen and (max-width: 1380px){
   #main{
