@@ -18,7 +18,7 @@ var users = {
 };
 connections = [];
 
-io.sockets.on('connection', function(socket){
+io.sockets.on('connection', function(socket) {
     connections.push(socket);
     var address = socket.handshake.address;
 
@@ -26,17 +26,17 @@ io.sockets.on('connection', function(socket){
 
     users.count++;
     io.sockets.emit('new_connect', [users.count,address]);
-    
-    socket.on('disconnect', function(data){
+
+    socket.on('disconnect', function(data) {
         console.log("Отключено "+address);
         connections.splice(connections.indexOf(socket), 1);
         users.count = users.count-1;
         io.sockets.emit('new_connect', [users.count,address]);
     });
 
-    socket.on('send mess', function(data){
+    socket.on('send mess', function(data) {
         io.sockets.emit('add mess', {
-            mess: data.mess, 
+            mess: data.mess,
             name: data.name,
             time: data.time
         });

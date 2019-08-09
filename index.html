@@ -14,9 +14,12 @@
             <div id="online">
                 Сейчас онлайн: <div id="count">0</div>
             </div>
-            <div id="rooms">
-                <div id="makeroom">
-                    Cоздать комнату <div id="symbol">+</div>
+            <div id="roomsBlock">
+                <div class="rooms">
+                    <div class="room">Комната</div>
+                    <div id="makeroom" onclick="createRoom()">
+                        <div id="symbol">+</div> Создать комнату
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,27 +41,27 @@
     <script src="/socket.io/socket.io.js "></script>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
-            var socket = io.connect();
-            var form = document.getElementById("messForm");
-            var all_messages = document.getElementById("all_mess");
-            var name = document.getElementById("name");
-            var message = document.getElementById("message");
-            var count = document.getElementById("count");
-            var none = document.getElementById("none_info");
-            var colors = [{
-                            bg: '#e6f3ff',
-                            text: 'black'
+            let socket = io.connect();
+            let form = document.getElementById("messForm");
+            let all_messages = document.getElementById("all_mess");
+            let name = document.getElementById("name");
+            let message = document.getElementById("message");
+            let count = document.getElementById("count");
+            let none = document.getElementById("none_info");
+            let colors = [{
+                bg: '#e6f3ff',
+                text: 'black'
             }];
-            var now2 = new Date();
-            var isFirstMsg = false;
+            let now2 = new Date();
+            let isFirstMsg = false;
 
             form.onsubmit = function(event){
                 event.preventDefault();
-                var now = new Date();
+                let now = new Date();
 
-                socket.emit('send mess', 
+                socket.emit('send mess',
                 {
-                    mess: message.value, 
+                    mess: message.value,
                     name: name.value,
                     time: now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds()
                 });
@@ -73,8 +76,8 @@
                 count.textContent = data[0];
                 if(!isFirstMsg){
                     none.remove();
-                    var newDiv = document.createElement('div');
-                    var rnd = getRnd(colors.length);
+                    let newDiv = document.createElement('div');
+                    let rnd = getRnd(colors.length);
                     newDiv.innerHTML = '<div style="background:#d8f3b6;color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Здравствуйте, уважаемый!<br> Предыдущая история сообщений не сохраняется. При обновлении страницы вы также потеряете все сообщения.</div><div class="time"> (' + now2.getHours() + ":" + now2.getMinutes() + ":" + now2.getSeconds() + ')' + '</div></div></div>';
                     all_messages.appendChild(newDiv);
                     all_messages.scrollTop = all_messages.scrollHeight;
@@ -85,8 +88,8 @@
 
             function addDiv(data){
                 none.remove();
-                var newDiv = document.createElement('div');
-                var rnd = getRnd(colors.length);
+                let newDiv = document.createElement('div');
+                let rnd = getRnd(colors.length);
                 newDiv.innerHTML = '<div style="background:'+ colors[rnd].bg +';color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">'+ data.name + '</div><div class="body"><div class="message">' + data.mess + '</div><div class="time"> (' + data.time + ')' + '</div></div></div>';
                 all_messages.appendChild(newDiv);
                 all_messages.scrollTop = all_messages.scrollHeight;
@@ -96,6 +99,13 @@
                 return parseInt(Math.random() * max);
             }
         });
+
+        function createRoom() {
+            let element = document.createElement('div');
+            let makeroom = document.querySelector('#makeroom');
+            element.innerHTML = 'Комната', element.className = 'room';
+            document.querySelector(".rooms").insertBefore(element, makeroom);
+        }
     </script>
 </body>
 </html>

@@ -14,8 +14,8 @@ body {
 .form-signin {
   width: 100%;
   margin: auto;
-  position:relative;
-  bottom:0;
+  position: relative;
+  bottom: 0;
 }
 .form-signin .checkbox {
   font-weight: 400;
@@ -39,42 +39,42 @@ body {
   user-select: none;
 }
 #main{
-  min-width:80%;
-  max-width:900px;
-  margin:0 auto;
-  display:flex;
+  min-width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
 }
 #messagemain{
-  width:70%;
-  padding:20px;
-  margin:0 auto;
+  width: 70%;
+  padding: 20px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
 #online{
-  position:relative;
-  width:auto;
+  position: relative;
+  width: auto;
   margin-left: auto;
   margin-right: auto;
-  top:0;
+  top: 0;
   left: 0;
   right: 0;
 }
 .header{
-  font-weight:bold;
-  text-align:left;
+  font-weight: bold;
+  text-align: left;
 }
 .body{
-  text-align:left;
-  display:flex;
+  text-align: left;
+  display: flex;
 }
 .time{
-  margin-left:auto;
+  margin-left: auto;
 }
 #all_mess{
-  overflow:auto;
-  margin-bottom:20px;
-  height:100%;
+  overflow: auto;
+  margin-bottom: 20px;
+  height: 100%;
 }
 
 #all_mess::-webkit-scrollbar-track {
@@ -84,7 +84,8 @@ body {
   width: 6px;
 }
 #all_mess::-webkit-scrollbar-thumb {
-  border-radius: 4px;background: #d2d3e7;
+  border-radius: 4px;
+  background: #d2d3e7;
 }
 #all_mess:hover::-webkit-scrollbar-thumb {
   background: #97a1a5;
@@ -94,42 +95,56 @@ body {
   position: relative;
 }
 
-.messages{ 
-  padding:10px;
-  border-radius:10px;
+.messages{
+  padding: 10px;
+  border-radius: 10px;
 }
 .messageblock{
-  margin-top:4px;
-  margin-bottom:2px;
-  padding:4px;
-  border-radius:10px;
-  padding-left:6px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+  padding: 4px;
+  border-radius: 10px;
+  padding-left: 6px;
   box-shadow: 0 3px 4px rgba(0,0,0,0.3);
   border: 1px solid rgba(0,0,0,0.3);
 }
 #list{
   position:relative;
-  width:30%;
+  width:  30%;
   border-right: 2px solid #E9EBED;
 }
-#rooms{
-  width:100%;
+.rooms {
   border: 1px solid rgba(0,0,0,0.3);
-  position:relative;
+}
+#roomsBlock .room{
+  border-top: 1px solid rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  margin: 4px 0;
+  padding: 10px 0;
+  cursor: pointer;
+}
+#roomsBlock .room:hover{
+  background: #6ba5fa;
+  color: white;
+}
+#symbol{
+  margin-right: 4px;
+  margin-top: -4px;
+  font-size: 20px;
 }
 #makeroom{
-  cursor:pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  color: blue;
 }
-#rooms #symbol{
-  position:absolute;
-  right:0px;
-  top:0px;
-  transition-property: transform;
-  transition-duration: 1s;
-  font-size:16px;
-}
-#symbol:hover{
-  transform:scale(2);
+#makeroom:hover{
+  font-size: 1.2rem;
+  transition: font-size 2s;
 }
 @media screen and (max-width: 1380px){
   #main{
