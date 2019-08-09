@@ -1,7 +1,7 @@
-var express = require("express");
-var app = express();
-var server = require("http").createServer(app).listen(3000);
-var io = require("socket.io").listen(server);
+let express = require("express");
+let app = express();
+let server = require("http").createServer(app).listen(3000);
+let io = require("socket.io").listen(server);
 
 app.get('/', (req,resp) => {
     resp.sendFile(__dirname + "/index.html");
@@ -12,15 +12,18 @@ app.get('/style.css', (req,resp) => {
 app.get('/enter.html', (req,resp) => {
     resp.sendFile(__dirname + "/enter.html");
 });
+app.get('/styleEnter.css', (req,resp) => {
+    resp.sendFile(__dirname + "/styleEnter.css");
+});
 
-var users = {
+let users = {
     count: 0
 };
 connections = [];
 
 io.sockets.on('connection', function(socket) {
     connections.push(socket);
-    var address = socket.handshake.address;
+    let address = socket.handshake.address;
 
     console.log("Успешное соединение "+address);
 

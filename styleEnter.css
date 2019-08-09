@@ -1,0 +1,25 @@
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+#messForm {
+  max-width: 600px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.enterImg {
+  width: auto;
+  margin: 0 auto;
+}
+
+.titleCenter {
+  width: auto;
+  margin: 0 auto;
+}
+
+input {
+  margin: 10px 0;
+}
