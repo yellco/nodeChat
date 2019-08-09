@@ -4,16 +4,16 @@ let server = require("http").createServer(app).listen(3000);
 let io = require("socket.io").listen(server);
 
 app.get('/', (req,resp) => {
-    resp.sendFile(__dirname + "/index.html");
-});
-app.get('/style.css', (req,resp) => {
-    resp.sendFile(__dirname + "/style.css");
-});
-app.get('/enter.html', (req,resp) => {
     resp.sendFile(__dirname + "/enter.html");
 });
 app.get('/styleEnter.css', (req,resp) => {
     resp.sendFile(__dirname + "/styleEnter.css");
+});
+app.get('/index.html', (req,resp) => {
+    resp.sendFile(__dirname + "/index.html");
+});
+app.get('/style.css', (req,resp) => {
+    resp.sendFile(__dirname + "/style.css");
 });
 
 let users = {
