@@ -19,7 +19,7 @@ app.get('/style.css', (req,resp) => {
 let users = {
     count: 0
 };
-connections = [];
+let connections = [];
 
 console.log('***************');
 console.log('Сервер запущен.');
