@@ -4,13 +4,13 @@ let server = require("http").createServer(app).listen(3000);
 let io = require("socket.io").listen(server);
 
 app.get('/', (req,resp) => {
-    resp.sendFile(__dirname + "/enter.html");
+    resp.sendFile(__dirname + "/index.html");
 });
 app.get('/styleEnter.css', (req,resp) => {
     resp.sendFile(__dirname + "/styleEnter.css");
 });
-app.get('/index.html', (req,resp) => {
-    resp.sendFile(__dirname + "/index.html");
+app.get('/enter.html', (req,resp) => {
+    resp.sendFile(__dirname + "/enter.html");
 });
 app.get('/style.css', (req,resp) => {
     resp.sendFile(__dirname + "/style.css");
@@ -20,6 +20,10 @@ let users = {
     count: 0
 };
 connections = [];
+
+console.log('***************');
+console.log('Сервер запущен.');
+console.log('***************');
 
 io.sockets.on('connection', function(socket) {
     connections.push(socket);
