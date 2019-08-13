@@ -56,4 +56,8 @@ io.sockets.on('connection', function(socket) {
             time: data.time
         });
     });
+
+    socket.on('responseData', function(data) {
+        io.sockets.emit('responseData', [users.count,messages]);
+    });
 });

@@ -16,7 +16,8 @@
             </div>
             <div id="roomsBlock">
                 <div class="rooms">
-                    <div class="room">Общая комната</div>
+                    <div class="room" onclick="changeMode(false)">Общая комната</div>
+                    <div class="room quest" onclick="changeMode(true)">Квест</div>
                     <div style="color:grey" id="makeroom" onclick="createRoom()">
                         +&nbsp;Создать комнату
                     </div>
@@ -40,21 +41,25 @@
     </div>
     <script src="/socket.io/socket.io.js "></script>
     <script>
+        let socket = io.connect();
+
+        let quest = false;
+
+        let all_messages = document.getElementById("all_mess");
+        let form = document.getElementById("messForm");
+        let name = document.getElementById("name");
+        let message = document.getElementById("message");
+        let count = document.getElementById("count");
+        let none = document.getElementById("none_info");
+
+        let colors = [{
+            bg: '#e6f3ff',
+            text: 'black'
+        }];
+
+        let now2 = new Date();
+
         document.addEventListener('DOMContentLoaded', function(){
-            let socket = io.connect();
-
-            let form = document.getElementById("messForm");
-            let all_messages = document.getElementById("all_mess");
-            let name = document.getElementById("name");
-            let message = document.getElementById("message");
-            let count = document.getElementById("count");
-            let none = document.getElementById("none_info");
-
-            let colors = [{
-                bg: '#e6f3ff',
-                text: 'black'
-            }];
-            let now2 = new Date();
 
             form.onsubmit = function(event){
                 event.preventDefault();
@@ -78,38 +83,67 @@
                 console.log("new_connect");
                 count.textContent = data[0];
                 if (data[1] && data[1].length > 0) {
-                    none.remove();
+                    none.style.display = 'none';
                     data[1].map(e => addDiv(e));
                 } else {
-                    none.remove();
-                    let newDiv = document.createElement('div');
-                    let rnd = getRnd(colors.length);
-                    newDiv.innerHTML = '<div style="background:#d8f3b6;color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Здравствуйте, уважаемый!<br> Вас приветствует чат-комната. При перезапуске сервера история сообщений не отображается. При обновлении страницы история сообщений не потеряется.</div><div class="time"> (' + now2.getHours() + ":" + now2.getMinutes() + ":" + now2.getSeconds() + ')' + '</div></div></div>';
-                    all_messages.appendChild(newDiv);
-                    all_messages.scrollTop = all_messages.scrollHeight;
+                    displayStartMessage();
                 }
             });
 
             socket.on('disconnect', function(data){
                 console.log("disconnect");
                 count.textContent = data[0];
-                all_messages.innerHTML = '';
+                clearAll();
             });
 
-            function addDiv(data){
-                none.remove();
-                let newDiv = document.createElement('div');
-                let rnd = getRnd(colors.length);
-                newDiv.innerHTML = '<div style="background:'+ colors[rnd].bg +';color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">'+ data.name + '</div><div class="body"><div class="message">' + data.mess + '</div><div class="time"> (' + data.time + ')' + '</div></div></div>';
-                all_messages.appendChild(newDiv);
-                all_messages.scrollTop = all_messages.scrollHeight;
-            }
-
-            function getRnd(max) {
-                return parseInt(Math.random() * max);
-            }
+            socket.on('responseData', function(data){
+                clearAll();
+                if (data[1] && data[1].length > 0) {
+                    none.style.display = 'none';
+                    data[1].map(e => addDiv(e));
+                } else {
+                    none.style.display = 'block';
+                    displayStartMessage();
+                }
+            });
         });
 
+        function displayStartMessage() {
+            none.style.display = 'none';
+            let newDiv = document.createElement('div');
+            let rnd = getRnd(colors.length);
+            newDiv.innerHTML = '<div style="background:#d8f3b6;color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Здравствуйте, уважаемый!<br> Вас приветствует чат-комната. При перезапуске сервера история сообщений не отображается. При обновлении страницы история сообщений не потеряется.</div><div class="time"> (' + now2.getHours() + ":" + now2.getMinutes() + ":" + now2.getSeconds() + ')' + '</div></div></div>';
+            all_messages.appendChild(newDiv);
+            all_messages.scrollTop = all_messages.scrollHeight;
+        }
+
+        function addDiv(data){
+            none.style.display = 'none';
+            let newDiv = document.createElement('div');
+            let rnd = getRnd(colors.length);
+            newDiv.innerHTML = '<div style="background:'+ colors[rnd].bg +';color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">'+ data.name + '</div><div class="body"><div class="message">' + data.mess + '</div><div class="time"> (' + data.time + ')' + '</div></div></div>';
+            all_messages.appendChild(newDiv);
+            all_messages.scrollTop = all_messages.scrollHeight;
+        }
+
+        function getRnd(max) {
+            return parseInt(Math.random() * max);
+        }
+
+        function changeMode(isQuest) {
+            quest = isQuest;
+            if (quest) {
+                startQuest();
+            } else {
+                startChat();
+            }
+        }
+
+        function clearAll() {
+            all_messages.innerHTML = '';
+        }
+
+        // пока скрываем функционал
         function createRoom() {
             // спецом не заходим пока в комнаты, потом убрать проверку
             if (false) {
@@ -124,6 +158,20 @@
                     document.querySelector(".rooms").insertBefore(element, makeroom);
                 }
             }
+        }
+
+        function startChat() {
+            socket.emit('responseData');
+        }
+
+        function startQuest() {
+            clearAll();
+            none.style.display = 'none';
+            let newDiv = document.createElement('div');
+            let rnd = getRnd(colors.length);
+            newDiv.innerHTML = '<div style="background:#d8f3b6;color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Вы перешли в текстовый квест. <br> Данный режим находится в разработке. Вернитесь попозже!</div><div class="time"> (' + now2.getHours() + ":" + now2.getMinutes() + ":" + now2.getSeconds() + ')' + '</div></div></div>';
+            all_messages.appendChild(newDiv);
+            all_messages.scrollTop = all_messages.scrollHeight;
         }
     </script>
 </body>
