@@ -42,12 +42,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', function(){
             let socket = io.connect();
+
             let form = document.getElementById("messForm");
             let all_messages = document.getElementById("all_mess");
             let name = document.getElementById("name");
             let message = document.getElementById("message");
             let count = document.getElementById("count");
             let none = document.getElementById("none_info");
+
             let colors = [{
                 bg: '#e6f3ff',
                 text: 'black'
@@ -63,7 +65,7 @@
                 {
                     mess: message.value,
                     name: name.value,
-                    time: now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds()
+                    time: (now.getHours().toString().length < 2 ? '0' + now.getHours() : now.getHours()) + ":" + (now.getMinutes().toString().length < 2 ? '0' + now.getMinutes() : now.getMinutes()) + ":" + (now.getSeconds().toString().length < 2 ? '0' + now.getSeconds() : now.getSeconds())
                 });
                 message.value = '';
             }

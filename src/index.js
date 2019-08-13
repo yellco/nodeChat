@@ -19,6 +19,9 @@ app.get('/style.css', (req,resp) => {
 let users = {
     count: 0
 };
+
+let messages = [];
+
 let connections = [];
 
 console.log('***************');
@@ -42,10 +45,16 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('send mess', function(data) {
+        messages.push({
+            mess: data.mess,
+            name: data.name,
+            time: data.time
+        });
         io.sockets.emit('add mess', {
             mess: data.mess,
             name: data.name,
             time: data.time
         });
+        console.table(messages);
     });
 });
