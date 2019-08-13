@@ -16,8 +16,8 @@
             </div>
             <div id="roomsBlock">
                 <div class="rooms">
-                    <div class="room">Комната</div>
-                    <div id="makeroom" onclick="createRoom()">
+                    <div class="room">Общая комната</div>
+                    <div style="color:grey" id="makeroom" onclick="createRoom()">
                         +&nbsp;Создать комнату
                     </div>
                 </div>
@@ -55,7 +55,6 @@
                 text: 'black'
             }];
             let now2 = new Date();
-            let isFirstMsg = false;
 
             form.onsubmit = function(event){
                 event.preventDefault();
@@ -71,21 +70,30 @@
             }
 
             socket.on('add mess', function(data){
-                addDiv(data)
+                console.log("add mess");
+                addDiv(data);
             });
 
             socket.on('new_connect', function(data){
+                console.log("new_connect");
                 count.textContent = data[0];
-                if(!isFirstMsg){
+                if (data[1] && data[1].length > 0) {
+                    none.remove();
+                    data[1].map(e => addDiv(e));
+                } else {
                     none.remove();
                     let newDiv = document.createElement('div');
                     let rnd = getRnd(colors.length);
-                    newDiv.innerHTML = '<div style="background:#d8f3b6;color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Здравствуйте, уважаемый!<br> Предыдущая история сообщений не сохраняется. При обновлении страницы вы также потеряете все сообщения.</div><div class="time"> (' + now2.getHours() + ":" + now2.getMinutes() + ":" + now2.getSeconds() + ')' + '</div></div></div>';
+                    newDiv.innerHTML = '<div style="background:#d8f3b6;color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Здравствуйте, уважаемый!<br> Вас приветствует чат-комната. При перезапуске сервера история сообщений не отображается. При обновлении страницы история сообщений не потеряется.</div><div class="time"> (' + now2.getHours() + ":" + now2.getMinutes() + ":" + now2.getSeconds() + ')' + '</div></div></div>';
                     all_messages.appendChild(newDiv);
                     all_messages.scrollTop = all_messages.scrollHeight;
-                    isFirstMsg = true;
                 }
+            });
 
+            socket.on('disconnect', function(data){
+                console.log("disconnect");
+                count.textContent = data[0];
+                all_messages.innerHTML = '';
             });
 
             function addDiv(data){
@@ -103,10 +111,19 @@
         });
 
         function createRoom() {
-            let element = document.createElement('div');
-            let makeroom = document.querySelector('#makeroom');
-            element.innerHTML = 'Комната', element.className = 'room';
-            document.querySelector(".rooms").insertBefore(element, makeroom);
+            // спецом не заходим пока в комнаты, потом убрать проверку
+            if (false) {
+                let element = document.createElement('div');
+                let makeroom = document.querySelector('#makeroom');
+                element.innerHTML = 'Комната', element.className = 'room';
+                if (document.querySelectorAll(".room").length < 6) {
+                    if (document.querySelectorAll(".room").length === 5) {
+                        makeroom.style.color = "#000";
+                        makeroom.style.opacity = ".3";
+                    }
+                    document.querySelector(".rooms").insertBefore(element, makeroom);
+                }
+            }
         }
     </script>
 </body>
