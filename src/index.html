@@ -14,11 +14,19 @@
             <div id="online">
                 Сейчас онлайн: <div id="count">0</div>
             </div>
-            <div id="roomsBlock">
-                <div class="rooms">
-                    <div class="room" onclick="changeMode(false)">Общая комната</div>
-                    <div class="room quest" onclick="changeMode(true)">Квест</div>
-                    <div style="color:grey" id="makeroom" onclick="createRoom()">
+            <div class="menu" id="roomsBlock menu">
+                <div class="icon__back">
+                    <div class="menu__icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="rooms menu__links">
+                    <div class="menu__links-item room" onclick="changeMode(false)">Общая комната</div>
+                    <div class="menu__links-item room quest" onclick="changeMode(true)">Квест</div>
+                    <div class="menu__links-item" style="color:grey" id="makeroom" onclick="createRoom()">
                         +&nbsp;Создать комнату
                     </div>
                 </div>
@@ -60,6 +68,11 @@
         let now2 = new Date();
 
         document.addEventListener('DOMContentLoaded', function(){
+
+            document.querySelector(".menu__icon").onclick = function() {
+                console.log("click");
+                document.querySelector('.menu').classList.toggle('menu_state_open');
+            }
 
             form.onsubmit = function(event){
                 event.preventDefault();

@@ -38,9 +38,9 @@ io.sockets.on('connection', function(socket) {
     io.sockets.emit('new_connect', [users.count,messages]);
 
     socket.on('disconnect', function(data) {
-        console.log("Отключено "+address);
+        console.log("Отключено " + address);
         connections.splice(connections.indexOf(socket), 1);
-        users.count = users.count-1;
+        users.count = users.count--;
         io.sockets.emit('disconnect', [users.count,messages]);
     });
 
