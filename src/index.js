@@ -40,7 +40,7 @@ io.sockets.on('connection', function(socket) {
     socket.on('disconnect', function(data) {
         console.log("Отключено " + address);
         connections.splice(connections.indexOf(socket), 1);
-        users.count = users.count--;
+        users.count = users.count-1;
         io.sockets.emit('disconnect', [users.count,messages]);
     });
 
