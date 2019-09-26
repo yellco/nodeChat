@@ -41,8 +41,12 @@
                 <label for="name" class="sr-only">Имя</label>
                 <input type="text" id="name" class="form-control" placeholder="Имя" required>
                 <label for="message" class="sr-only">Сообщение</label>
-                <input type="text" id="message" class="form-control" placeholder="Сообщение" required autofocus>
+                <div class="downBlock" style="display: flex; align-items: center;">
+                    <input type="text" id="message" class="form-control" placeholder="Сообщение" required autofocus>
+                    <img src="http://simpleicon.com/wp-content/uploads/smile.png" style="width:20px; height: 20px; margin-left: 10px; cursor: pointer;"/>
+                </div>
                 <br>
+                <div class="smiles"></div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Отправить</button>
             </form>
         </div>
