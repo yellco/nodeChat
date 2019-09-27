@@ -56,6 +56,29 @@ input {
   flex-direction: column;
   position: relative;
 }
+#stickers {
+  display: none;
+  position: fixed;
+  justify-content: space-around;
+  height: 80vh;
+  align-items: center;
+  top: 10%;
+  overflow: auto;
+  left: 10%;
+  right: 10%;
+  padding: 20px;
+  flex-wrap: wrap;
+  background: #fdfdfd;
+  box-shadow: 0 0 100px rgba(255, 255, 255, 0.5);
+  z-index: 10;
+  border-radius: 10px;
+  border: 2px solid grey;
+}
+#stickers img {
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+}
 .developing {
   font-size: 16px;
   color: white;
