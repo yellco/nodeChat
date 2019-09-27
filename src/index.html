@@ -33,6 +33,7 @@
             </div>
         </div>
         <div id="messagemain">
+            <div class="developing">Данный раздел находится в разработке.</div>
             <h3>Сообщения</h3>
             <div id="all_mess">
                 <div id="none_info">Пока никто ничего не написал</div>
@@ -178,10 +179,12 @@
         }
 
         function startChat() {
+            document.querySelector(".developing").style.display="none";
             socket.emit('responseData');
         }
 
         function startQuest() {
+            document.querySelector(".developing").style.display="flex";
             clearAll();
             none.style.display = 'none';
             let newDiv = document.createElement('div');
