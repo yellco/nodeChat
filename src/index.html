@@ -1,261 +1,366 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Чатик</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css" type="text/css">
-</head>
-<body class="text-center">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" type="text/css" />
+  </head>
+  <body class="text-center">
     <div id="main">
-        <div id="list">
-            <div id="online">
-                Сейчас онлайн: <div id="count">0</div>
-            </div>
-            <div class="menu" id="roomsBlock menu">
-                <div class="icon__back">
-                    <div class="menu__icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-                <div class="rooms menu__links">
-                    <div class="menu__links-item room" onclick="changeMode(false)">Общая комната</div>
-                    <div class="menu__links-item room quest" onclick="changeMode(true)">Текстовый квест</div>
-                    <div class="menu__links-item" style="color:grey" id="makeroom" onclick="createRoom()">
-                        +&nbsp;Создать комнату
-                    </div>
-                </div>
-            </div>
+      <div id="list">
+        <div id="online">
+          Сейчас онлайн:
+          <div id="count">0</div>
         </div>
-        <div id="messagemain">
-            <div class="developing">Данный раздел находится в разработке.</div>
-            <h3>Сообщения</h3>
-            <div id="all_mess">
-                <div id="none_info">Пока никто ничего не написал</div>
+        <div class="menu" id="roomsBlock menu">
+          <div class="icon__back">
+            <div class="menu__icon">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
-            <!-- Подложка под стикеры -->
-            <div id="background"></div>
-            <div id="stickers">
-                <img onclick="sendStick(this)" id="sticker1" src="stickers/1.png"/>
-                <img onclick="sendStick(this)" id="sticker2" src="stickers/2.png"/>
-                <img onclick="sendStick(this)" id="sticker3" src="stickers/3.png"/>
-                <img onclick="sendStick(this)" id="sticker4" src="stickers/4.png"/>
-                <img onclick="sendStick(this)" id="sticker5" src="stickers/5.png"/>
-                <img onclick="sendStick(this)" id="sticker6" src="stickers/6.png"/>
-                <img onclick="sendStick(this)" id="sticker7" src="stickers/7.png"/>
-                <img onclick="sendStick(this)" id="sticker8" src="stickers/8.png"/>
-                <img onclick="sendStick(this)" id="sticker9" src="stickers/9.png"/>
-                <img onclick="sendStick(this)" id="sticker10" src="stickers/10.png"/>
-                <img onclick="sendStick(this)" id="sticker11" src="stickers/11.png"/>
-                <img onclick="sendStick(this)" id="sticker12" src="stickers/12.png"/>
+          </div>
+          <div class="rooms menu__links">
+            <div class="menu__links-item room" onclick="changeMode(false)">
+              Общая комната
             </div>
-            <form class="form-signin" id="messForm">
-                <label for="name" class="sr-only">Имя</label>
-                <input type="text" id="name" class="form-control" placeholder="Имя" required>
-                <label for="message" class="sr-only">Сообщение</label>
-                <div class="downBlock" style="display: flex; align-items: center;">
-                    <input type="text" id="message" class="form-control" placeholder="Сообщение" required autofocus>
-                    <img onclick="stick()" src="http://simpleicon.com/wp-content/uploads/smile.png" style="width:20px; height: 20px; margin-left: 10px; cursor: pointer;"/>
-                </div>
-                <br>
-                <div class="smiles"></div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Отправить</button>
-            </form>
+            <div class="menu__links-item room quest" onclick="changeMode(true)">
+              Текстовый квест
+            </div>
+            <div
+              class="menu__links-item"
+              style="color:grey"
+              id="makeroom"
+              onclick="createRoom()"
+            >
+              +&nbsp;Создать комнату
+            </div>
+          </div>
         </div>
+      </div>
+      <div id="messagemain">
+        <div class="developing">
+          Данный раздел находится в разработке.
+        </div>
+        <h3>Сообщения</h3>
+        <div id="all_mess">
+          <div id="none_info">
+            Пока никто ничего не написал
+          </div>
+        </div>
+        <!-- Подложка под стикеры -->
+        <div id="background"></div>
+        <div id="stickers">
+          <img onclick="sendStick(this)" id="sticker1" src="stickers/1.png" />
+          <img onclick="sendStick(this)" id="sticker2" src="stickers/2.png" />
+          <img onclick="sendStick(this)" id="sticker3" src="stickers/3.png" />
+          <img onclick="sendStick(this)" id="sticker4" src="stickers/4.png" />
+          <img onclick="sendStick(this)" id="sticker5" src="stickers/5.png" />
+          <img onclick="sendStick(this)" id="sticker6" src="stickers/6.png" />
+          <img onclick="sendStick(this)" id="sticker7" src="stickers/7.png" />
+          <img onclick="sendStick(this)" id="sticker8" src="stickers/8.png" />
+          <img onclick="sendStick(this)" id="sticker9" src="stickers/9.png" />
+          <img onclick="sendStick(this)" id="sticker10" src="stickers/10.png" />
+          <img onclick="sendStick(this)" id="sticker11" src="stickers/11.png" />
+          <img onclick="sendStick(this)" id="sticker12" src="stickers/12.png" />
+        </div>
+        <form class="form-signin" id="messForm">
+          <label for="name" class="sr-only">Имя</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            placeholder="Имя"
+            required
+          />
+          <label for="message" class="sr-only">Сообщение</label>
+          <div class="downBlock" style="display: flex; align-items: center;">
+            <input
+              type="text"
+              id="message"
+              class="form-control"
+              placeholder="Сообщение"
+              required
+              autofocus
+            />
+            <img
+              onclick="stick()"
+              src="http://simpleicon.com/wp-content/uploads/smile.png"
+              style="width:20px; height: 20px; margin-left: 10px; cursor: pointer;"
+            />
+          </div>
+          <br />
+          <div class="smiles"></div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">
+            Отправить
+          </button>
+        </form>
+      </div>
     </div>
     <script src="/socket.io/socket.io.js "></script>
     <script>
-        let socket = io.connect();
+      let socket = io.connect();
 
-        let quest = false;
+      let quest = false;
 
-        let all_messages = document.getElementById("all_mess");
-        let form = document.getElementById("messForm");
-        let name = document.getElementById("name");
-        let message = document.getElementById("message");
-        let count = document.getElementById("count");
-        let none = document.getElementById("none_info");
+      let all_messages = document.getElementById("all_mess");
+      let form = document.getElementById("messForm");
+      let name = document.getElementById("name");
+      let message = document.getElementById("message");
+      let count = document.getElementById("count");
+      let none = document.getElementById("none_info");
 
-        let colors = [{
-            bg: '#e6f3ff',
-            text: 'black'
-        }];
+      let colors = [
+        {
+          bg: "#e6f3ff",
+          text: "black"
+        }
+      ];
 
-        let now2 = new Date();
+      let now2 = new Date();
 
-        document.addEventListener('DOMContentLoaded', function(){
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector(".menu__icon").onclick = function() {
+          document.querySelector(".menu").classList.toggle("menu_state_open");
+        };
 
-            document.querySelector(".menu__icon").onclick = function() {
-                document.querySelector('.menu').classList.toggle('menu_state_open');
-            }
+        document.querySelector("#background").onclick = function() {
+          document.querySelector("#stickers").style.display = "none";
+          document.querySelector("#background").style.display = "none";
+        };
 
-            document.querySelector("#background").onclick = function() {
-                document.querySelector("#stickers").style.display = "none";
-                document.querySelector("#background").style.display = "none";
-            }
+        form.onsubmit = function(event) {
+          event.preventDefault();
+          let now = new Date();
 
-            form.onsubmit = function(event){
-                event.preventDefault();
-                let now = new Date();
+          socket.emit("send mess", {
+            mess: message.value,
+            name: name.value,
+            time:
+              (now.getHours().toString().length < 2
+                ? "0" + now.getHours()
+                : now.getHours()) +
+              ":" +
+              (now.getMinutes().toString().length < 2
+                ? "0" + now.getMinutes()
+                : now.getMinutes()) +
+              ":" +
+              (now.getSeconds().toString().length < 2
+                ? "0" + now.getSeconds()
+                : now.getSeconds())
+          });
+          message.value = "";
+        };
 
-                socket.emit('send mess',
-                {
-                    mess: message.value,
-                    name: name.value,
-                    time: (now.getHours().toString().length < 2 ? '0' + now.getHours() : now.getHours()) + ":" + (now.getMinutes().toString().length < 2 ? '0' + now.getMinutes() : now.getMinutes()) + ":" + (now.getSeconds().toString().length < 2 ? '0' + now.getSeconds() : now.getSeconds())
-                });
-                message.value = '';
-            }
-
-            socket.on('add mess', function(data){
-                console.log("SOCKETON::add mess");
-                addDiv(data);
-            });
-
-            socket.on('images', function(data){
-                console.log("images");
-                document.querySelector("#stickers").style.display = "none";
-                document.querySelector("#background").style.display = "none";
-                addImg(data);
-            });
-
-            socket.on('new_connect', function(data){
-                console.log("new_connect");
-                count.textContent = data[0];
-                if (data[1] && data[1].length > 0) {
-                    none.style.display = 'none';
-                    data[1].map(e => {
-                        if (e.mess.includes('http')) {
-                            addImg(e);
-                        } else {
-                            addDiv(e);
-                        }
-                    });
-                } else {
-                    displayStartMessage();
-                }
-            });
-
-            socket.on('disconnect', function(data){
-                console.log("disconnect");
-                if (data) count.textContent = data[0];    
-                clearAll();
-            });
-
-            socket.on('responseData', function(data){
-                clearAll();
-                if (data[1] && data[1].length > 0) {
-                    none.style.display = 'none';
-                    data[1].map(e => {
-                        if (e.mess.includes('http')) {
-                            addImg(e);
-                        } else {
-                            addDiv(e);
-                        }
-                    });
-                } else {
-                    none.style.display = 'block';
-                    displayStartMessage();
-                }
-            });
+        socket.on("add mess", function(data) {
+          console.log("SOCKETON::add mess");
+          addDiv(data);
         });
 
-        function stick() {
-            document.querySelector("#stickers").style.display = "flex";
-            document.querySelector("#background").style.display = "block";
-        }
+        socket.on("images", function(data) {
+          console.log("images");
+          document.querySelector("#stickers").style.display = "none";
+          document.querySelector("#background").style.display = "none";
+          addImg(data);
+        });
 
-        function sendStick(el) {
-            let now = new Date();
-            socket.emit('images',
-                {
-                    mess: document.querySelector("#" + el.id).src,
-                    name: name.value,
-                    time: (now.getHours().toString().length < 2 ? '0' + now.getHours() : now.getHours()) + ":" + (now.getMinutes().toString().length < 2 ? '0' + now.getMinutes() : now.getMinutes()) + ":" + (now.getSeconds().toString().length < 2 ? '0' + now.getSeconds() : now.getSeconds())
-                });
-        }
-        
-        function displayStartMessage() {
-            none.style.display = 'none';
-            let newDiv = document.createElement('div');
-            let rnd = getRnd(colors.length);
-            newDiv.innerHTML = '<div style="background:#d8f3b6;color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Здравствуйте, уважаемый!<br> Вас приветствует чат-комната. При перезапуске сервера история сообщений не отображается. При обновлении страницы история сообщений не потеряется.</div><div class="time"> (' + now2.getHours() + ":" + now2.getMinutes() + ":" + now2.getSeconds() + ')' + '</div></div></div>';
-            all_messages.appendChild(newDiv);
-            all_messages.scrollTop = all_messages.scrollHeight;
-        }
+        socket.on("new_connect", function(data) {
+          console.log("new_connect");
+          count.textContent = data[0];
+          if (data[1] && data[1].length > 0) {
+            none.style.display = "none";
+            data[1].map(e => {
+              if (e.mess.includes("http")) {
+                addImg(e);
+              } else {
+                addDiv(e);
+              }
+            });
+          } else {
+            displayStartMessage();
+          }
+        });
 
-        function addDiv(data){
-            none.style.display = 'none';
-            let newDiv = document.createElement('div');
-            let rnd = getRnd(colors.length);
-            newDiv.innerHTML = '<div style="background:'+ colors[rnd].bg +';color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">'+ data.name + '</div><div class="body"><div class="message">' + data.mess + '</div><div class="time"> (' + data.time + ')' + '</div></div></div>';
-            all_messages.appendChild(newDiv);
-            all_messages.scrollTop = all_messages.scrollHeight;
-        }
+        socket.on("disconnect", function(data) {
+          console.log("disconnect");
+          if (data) count.textContent = data[0];
+          clearAll();
+        });
 
-        function addImg(data){
-            none.style.display = 'none';
-            let newDiv = document.createElement('div');
-            let rnd = getRnd(colors.length);
-            newDiv.innerHTML = '<div style="background:'+ colors[rnd].bg +';color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">'+ data.name + '</div><div class="body"><div class="message">' + '<img style="width:200px;height: 200px;" src=' + data.mess + '/>' + '</div><div class="time"> (' + data.time + ')' + '</div></div></div>';
-            all_messages.appendChild(newDiv);
-            all_messages.scrollTop = all_messages.scrollHeight;
-        }
+        socket.on("responseData", function(data) {
+          clearAll();
+          if (data[1] && data[1].length > 0) {
+            none.style.display = "none";
+            data[1].map(e => {
+              if (e.mess.includes("http")) {
+                addImg(e);
+              } else {
+                addDiv(e);
+              }
+            });
+          } else {
+            none.style.display = "block";
+            displayStartMessage();
+          }
+        });
+      });
 
-        function getRnd(max) {
-            return parseInt(Math.random() * max);
-        }
+      function stick() {
+        document.querySelector("#stickers").style.display = "flex";
+        document.querySelector("#background").style.display = "block";
+      }
 
-        function changeMode(isQuest) {
-            quest = isQuest;
-            if (quest) {
-                startQuest();
-            } else {
-                startChat();
+      function sendStick(el) {
+        let now = new Date();
+        socket.emit("images", {
+          mess: document.querySelector("#" + el.id).src,
+          name: name.value,
+          time:
+            (now.getHours().toString().length < 2
+              ? "0" + now.getHours()
+              : now.getHours()) +
+            ":" +
+            (now.getMinutes().toString().length < 2
+              ? "0" + now.getMinutes()
+              : now.getMinutes()) +
+            ":" +
+            (now.getSeconds().toString().length < 2
+              ? "0" + now.getSeconds()
+              : now.getSeconds())
+        });
+      }
+
+      function displayStartMessage() {
+        none.style.display = "none";
+        let newDiv = document.createElement("div");
+        let rnd = getRnd(colors.length);
+        newDiv.innerHTML =
+          '<div style="background:#d8f3b6;color:' +
+          colors[rnd].text +
+          '" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Здравствуйте, уважаемый!<br>Вас приветствует чат-комната. При перезапуске сервера история сообщений не отображается. При обновлении страницы история сообщений не потеряется.</div><div class="time"> (' +
+          now2.getHours() +
+          ":" +
+          now2.getMinutes() +
+          ":" +
+          now2.getSeconds() +
+          ")" +
+          "</div></div></div>";
+        all_messages.appendChild(newDiv);
+        all_messages.scrollTop = all_messages.scrollHeight;
+      }
+
+      function addDiv(data) {
+        none.style.display = "none";
+        let newDiv = document.createElement("div");
+        let rnd = getRnd(colors.length);
+        newDiv.innerHTML =
+          '<div style="background:' +
+          colors[rnd].bg +
+          ";color:" +
+          colors[rnd].text +
+          '" class="messageblock"><div class="header">' +
+          data.name +
+          '</div><div class="body"><div class="message">' +
+          data.mess +
+          '</div><div class="time"> (' +
+          data.time +
+          ")" +
+          "</div></div></div>";
+        all_messages.appendChild(newDiv);
+        all_messages.scrollTop = all_messages.scrollHeight;
+      }
+
+      function addImg(data) {
+        none.style.display = "none";
+        let newDiv = document.createElement("div");
+        let rnd = getRnd(colors.length);
+        newDiv.innerHTML =
+          '<div style="background:' +
+          colors[rnd].bg +
+          ";color:" +
+          colors[rnd].text +
+          '" class="messageblock"><div class="header">' +
+          data.name +
+          '</div><div class="body"><div class="message">' +
+          '<img style="width:200px;height: 200px;" src=' +
+          data.mess +
+          "/>" +
+          '</div><div class="time"> (' +
+          data.time +
+          ")" +
+          "</div></div></div>";
+        all_messages.appendChild(newDiv);
+        all_messages.scrollTop = all_messages.scrollHeight;
+      }
+
+      function getRnd(max) {
+        return parseInt(Math.random() * max);
+      }
+
+      function changeMode(isQuest) {
+        quest = isQuest;
+        if (quest) {
+          startQuest();
+        } else {
+          startChat();
+        }
+      }
+
+      function clearAll() {
+        all_messages.innerHTML = "";
+      }
+
+      // пока скрываем функционал
+      function createRoom() {
+        // спецом не заходим пока в комнаты, потом убрать проверку
+        if (false) {
+          let element = document.createElement("div");
+          let makeroom = document.querySelector("#makeroom");
+          (element.innerHTML = "ÐÐ¾Ð¼Ð½Ð°ÑÐ°"), (element.className = "room");
+          if (document.querySelectorAll(".room").length < 6) {
+            if (document.querySelectorAll(".room").length === 5) {
+              makeroom.style.color = "#000";
+              makeroom.style.opacity = ".3";
             }
+            document.querySelector(".rooms").insertBefore(element, makeroom);
+          }
         }
+      }
 
-        function clearAll() {
-            all_messages.innerHTML = '';
-        }
+      function startChat() {
+        document.querySelector(".developing").style.display = "none";
+        socket.emit("responseData");
+      }
 
-        // пока скрываем функционал
-        function createRoom() {
-            // спецом не заходим пока в комнаты, потом убрать проверку
-            if (false) {
-                let element = document.createElement('div');
-                let makeroom = document.querySelector('#makeroom');
-                element.innerHTML = 'Комната', element.className = 'room';
-                if (document.querySelectorAll(".room").length < 6) {
-                    if (document.querySelectorAll(".room").length === 5) {
-                        makeroom.style.color = "#000";
-                        makeroom.style.opacity = ".3";
-                    }
-                    document.querySelector(".rooms").insertBefore(element, makeroom);
-                }
-            }
-        }
-
-        function startChat() {
-            document.querySelector(".developing").style.display="none";
-            socket.emit('responseData');
-        }
-
-        function startQuest() {
-            document.querySelector(".developing").style.display="flex";
-            clearAll();
-            none.style.display = 'none';
-            let newDiv = document.createElement('div');
-            let rnd = getRnd(colors.length);
-            newDiv.innerHTML = '<div style="background:#d8f3b6;color:'+ colors[rnd].text  +'" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Вы перешли в текстовый квест. <br> Данный режим находится в разработке. Вернитесь попозже!</div><div class="time"> (' + now2.getHours() + ":" + now2.getMinutes() + ":" + now2.getSeconds() + ')' + '</div></div></div>';
-            all_messages.appendChild(newDiv);
-            all_messages.scrollTop = all_messages.scrollHeight;
-        }
+      function startQuest() {
+        document.querySelector(".developing").style.display = "flex";
+        clearAll();
+        none.style.display = "none";
+        let newDiv = document.createElement("div");
+        let rnd = getRnd(colors.length);
+        newDiv.innerHTML =
+          '<div style="background:#d8f3b6;color:' +
+          colors[rnd].text +
+          '" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Вы перешли в текстовый квест. <br> Данный режим находится в разработке. Вернитесь попозже!</div><div class="time"> (' +
+          now2.getHours() +
+          ":" +
+          now2.getMinutes() +
+          ":" +
+          now2.getSeconds() +
+          ")" +
+          "</div></div></div>";
+        all_messages.appendChild(newDiv);
+        all_messages.scrollTop = all_messages.scrollHeight;
+      }
     </script>
-</body>
+  </body>
 </html>
