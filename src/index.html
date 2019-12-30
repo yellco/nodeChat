@@ -113,7 +113,7 @@
             }
 
             socket.on('add mess', function(data){
-                console.log("add mess");
+                console.log("SOCKETON::add mess");
                 addDiv(data);
             });
 
@@ -129,7 +129,13 @@
                 count.textContent = data[0];
                 if (data[1] && data[1].length > 0) {
                     none.style.display = 'none';
-                    data[1].map(e => addDiv(e));
+                    data[1].map(e => {
+                        if (e.mess.includes('http')) {
+                            addImg(e);
+                        } else {
+                            addDiv(e);
+                        }
+                    });
                 } else {
                     displayStartMessage();
                 }
