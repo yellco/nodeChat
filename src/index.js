@@ -18,44 +18,8 @@ app.get("/style.css", (req, resp) => {
   resp.sendFile(__dirname + "/style.css");
 });
 
-// Временное решение
-// TODO
-app.get("/stickers/1.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/1.png");
-});
-app.get("/stickers/2.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/2.png");
-});
-app.get("/stickers/3.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/3.png");
-});
-app.get("/stickers/4.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/4.png");
-});
-app.get("/stickers/5.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/5.png");
-});
-app.get("/stickers/6.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/6.png");
-});
-app.get("/stickers/7.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/7.png");
-});
-app.get("/stickers/8.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/8.png");
-});
-app.get("/stickers/9.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/9.png");
-});
-app.get("/stickers/10.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/10.png");
-});
-app.get("/stickers/11.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/11.png");
-});
-app.get("/stickers/12.png", (req, resp) => {
-  resp.sendFile(__dirname + "/stickers/12.png");
-});
+// Все статичные файлы подключаем
+app.use('/stickers', express.static(__dirname + "/stickers"));
 
 let users = {
   count: 0

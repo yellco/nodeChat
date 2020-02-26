@@ -256,6 +256,11 @@ input {
   display: block;
 }
 
+.menu .logo{
+  width: 100%;
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 1380px){
   #main{
     min-width: 100%;
@@ -269,6 +274,9 @@ input {
 @media (max-width: 768px) {
   body {
     padding:4px;
+  }
+  .menu .logo{
+    display: none;
   }
   #online {
     position: fixed;

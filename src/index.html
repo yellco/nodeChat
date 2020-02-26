@@ -45,6 +45,7 @@
               +&nbsp;Создать комнату
             </div>
           </div>
+          <img src="stickers/logo.png" class="logo"/>
         </div>
       </div>
       <div id="messagemain">
@@ -146,6 +147,8 @@
             mess: message.value,
             name: name.value,
             time:
+              (now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear()) +
+              " " +
               (now.getHours().toString().length < 2
                 ? "0" + now.getHours()
                 : now.getHours()) +
@@ -225,6 +228,8 @@
           mess: document.querySelector("#" + el.id).src,
           name: name.value,
           time:
+            (now.getDate() + "." + (now.getMonth() + 1) + "." + now.getFullYear()) +
+            " " +
             (now.getHours().toString().length < 2
               ? "0" + now.getHours()
               : now.getHours()) +
@@ -247,11 +252,20 @@
           '<div style="background:#d8f3b6;color:' +
           colors[rnd].text +
           '" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Здравствуйте, уважаемый!<br>Вас приветствует чат-комната. При перезапуске сервера история сообщений не отображается. При обновлении страницы история сообщений не потеряется.</div><div class="time"> (' +
-          now2.getHours() +
-          ":" +
-          now2.getMinutes() +
-          ":" +
-          now2.getSeconds() +
+            (now2.getDate() + "." + (now2.getMonth() + 1) + "." + now2.getFullYear()) +
+            " " +
+            (now2.getHours().toString().length < 2
+              ? "0" + now2.getHours()
+              : now2.getHours()) +
+            ":" +
+            (now2.getMinutes().toString().length < 2
+              ? "0" + now2.getMinutes()
+              : now2.getMinutes()) +
+            ":" +
+            (now2.getSeconds().toString().length < 2
+              ? "0" + now2.getSeconds()
+              : now2.getSeconds())
+          +
           ")" +
           "</div></div></div>";
         all_messages.appendChild(newDiv);
@@ -351,11 +365,20 @@
           '<div style="background:#d8f3b6;color:' +
           colors[rnd].text +
           '" class="messageblock"><div class="header">Сервер</div><div class="body"><div class="message">Вы перешли в текстовый квест. <br> Данный режим находится в разработке. Вернитесь попозже!</div><div class="time"> (' +
-          now2.getHours() +
+          (now2.getDate() + "." + (now2.getMonth() + 1) + "." + now2.getFullYear()) +
+          " " +
+          (now2.getHours().toString().length < 2
+            ? "0" + now2.getHours()
+            : now2.getHours()) +
           ":" +
-          now2.getMinutes() +
+          (now2.getMinutes().toString().length < 2
+            ? "0" + now2.getMinutes()
+            : now2.getMinutes()) +
           ":" +
-          now2.getSeconds() +
+          (now2.getSeconds().toString().length < 2
+            ? "0" + now2.getSeconds()
+            : now2.getSeconds())
+              +
           ")" +
           "</div></div></div>";
         all_messages.appendChild(newDiv);
