@@ -5,21 +5,58 @@ let server = require("http")
   .listen(3000);
 let io = require("socket.io").listen(server);
 
-app.get("/", (req, resp) => {
+app.get("/chat/", (req, resp) => {
   resp.sendFile(__dirname + "/index.html");
 });
-app.get("/styleEnter.css", (req, resp) => {
+app.get("/chat/styleEnter.css", (req, resp) => {
   resp.sendFile(__dirname + "/styleEnter.css");
 });
-app.get("/enter.html", (req, resp) => {
+app.get("/chat/enter.html", (req, resp) => {
   resp.sendFile(__dirname + "/enter.html");
 });
-app.get("/style.css", (req, resp) => {
+app.get("/chat/style.css", (req, resp) => {
   resp.sendFile(__dirname + "/style.css");
 });
 
-// Все статичные файлы подключаем
-app.use('/stickers', express.static(__dirname + "/stickers"));
+app.get("/chat/stickers/1.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/1.png");
+});
+app.get("/chat/stickers/2.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/2.png");
+});
+app.get("/chat/stickers/3.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/3.png");
+});
+app.get("/chat/stickers/4.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/4.png");
+});
+app.get("/chat/stickers/5.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/5.png");
+});
+app.get("/chat/stickers/6.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/6.png");
+});
+app.get("/chat/stickers/7.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/7.png");
+});
+app.get("/chat/stickers/8.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/8.png");
+});
+app.get("/chat/stickers/9.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/9.png");
+});
+app.get("/chat/stickers/10.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/10.png");
+});
+app.get("/chat/stickers/11.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/11.png");
+});
+app.get("/chat/stickers/12.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/12.png");
+});
+app.get("/chat/stickers/logo.png", (req, resp) => {
+  resp.sendFile(__dirname + "/stickers/logo.png");
+});
 
 let users = {
   count: 0
