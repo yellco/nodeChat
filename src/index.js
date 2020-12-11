@@ -1,9 +1,9 @@
-let express = require("express");
-let app = express();
-let server = require("http")
+var express = require("express");
+var app = express();
+var server = require("http")
   .createServer(app)
   .listen(3000);
-let io = require("socket.io").listen(server);
+var io = require("socket.io").listen(server);
 
 app.get("/chat/", (req, resp) => {
   resp.sendFile(__dirname + "/index.html");
@@ -58,13 +58,13 @@ app.get("/chat/stickers/logo.png", (req, resp) => {
   resp.sendFile(__dirname + "/stickers/logo.png");
 });
 
-let users = {
+var users = {
   count: 0
 };
 
-let messages = [];
+var messages = [];
 
-let connections = [];
+var connections = [];
 
 console.log("***************");
 console.log("Сервер запущен.");
@@ -72,7 +72,7 @@ console.log("***************");
 
 io.sockets.on("connection", function(socket) {
   connections.push(socket);
-  let address = socket.handshake.address;
+  var address = socket.handshake.address;
 
   console.log("Успешное соединение " + address);
 
